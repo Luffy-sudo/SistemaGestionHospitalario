@@ -48,6 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.includes('admision.html')) {
         initializeAdmissionModule();
     }
+
+    if (window.location.pathname.includes('hce.html')) {
+        initializeHCEModule();
+    }
     
     // Aquí se añadirían las inicializaciones de otros módulos (e.g., farmacia.html)
 });
@@ -219,6 +223,74 @@ function initializeAdmissionModule() {
     
     // 5. Renderizado Inicial de la Tabla
     renderPatientTable(PATIENTS_DB);
+}
+
+// ==========================================================
+// LÓGICA ESPECÍFICA DEL MÓDULO HCE
+// ==========================================================
+
+function initializeHCEModule() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const patientId = urlParams.get('patient');
+    
+    const nameElement = document.getElementById('patient-name');
+    const detailsElement = document.getElementById('patient-details');
+    const warningElement = document.getElementById('patient-warning');
+    
+    if (!patientId) {
+        // Si no hay ID en la URL, mostramos el mensaje de advertencia
+        if (warningElement) warningElement.style.display = 'block';
+        return;
+    }
+
+    // Buscar los datos del paciente en la base de datos simulada (PATIENTS_DB, definida en script.js)
+    const patient = PATIENTS_DB.find(p => p.id === patientId);
+
+    if (patient) {
+        const age = calculateAge(patient.birthdate);
+        
+        nameElement.textContent = patient.name;
+        detailsElement.innerHTML = `ID: ${patient.id} | Edad: ${age} años | Última Visita: Hoy (simulado)`;
+        // Ocultamos la advertencia si el paciente se encuentra
+        if (warningElement) warningElement.style.display = 'none';
+
+    } else {
+        nameElement.textContent = 'Paciente NO ENCONTRADO';
+        detailsElement.innerHTML = `ID solicitado: ${patientId}`;
+        if (warningElement) warningElement.style.display = 'block';
+    }
+    
+    // Lógica para que las pestañas funcionen
+    setupHCETabs();
+}
+
+function setupHCETabs() {
+    document.querySelectorAll('.hce-tab-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            // Desactivar todos los botones y paneles
+            document.querySelectorAll('.hce-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.hce-tab-pane').forEach(pane => pane.classList.remove('active-pane'));
+            
+            // Activar el botón y el panel correctos
+            this.classList.add('active');
+            const tabId = this.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active-pane');
+        });
+    });
+}
+
+// Función utilitaria para calcular la edad a partir de la fecha de nacimiento (YYYY-MM-DD)
+function calculateAge(birthdate) {
+    if (!birthdate) return '--';
+    const today = new Date();
+    const dob = new Date(birthdate);
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDifference = today.getMonth() - dob.getMonth();
+    
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
+        age--;
+    }
+    return age;
 }
 
 // ==========================================================
