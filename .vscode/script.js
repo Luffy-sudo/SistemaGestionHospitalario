@@ -8,6 +8,14 @@
 // ==========================================================
 
 // Base de datos de pacientes simulada
+
+/*
+Los pacientes registrados (incluídos los nuevos) solo existen mientras la aplicación esté abierta en esa pestaña del navegador.
+Si se recarga la página o se cierra el navegador, los pacientes que no son los iniciales (P001, P002), se perderán.
+
+
+
+*/
 let PATIENTS_DB = [
     { id: 'P001', name: 'Ana María Soto', cedula: '101567890', phone: '+57 310 123 4567', birthdate: '1990-05-15', gender: 'F' },
     { id: 'P002', name: 'Carlos Javier López', cedula: '101567891', phone: '+57 320 987 6543', birthdate: '1985-11-20', gender: 'M' },
@@ -40,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userName = sessionStorage.getItem('userName');
     const userAvatar = sessionStorage.getItem('userAvatar');
     
-    // Inicializar el dashboard (Sidebar y Header) si el usuario está logeado
+    // Inicializar el dashboard (Sidebar y Header) si el usuario está logueado
     if (userRole && userName) {
         initializeDashboard(userRole, userName, userAvatar);
     }
@@ -279,6 +287,15 @@ function initializeHCEModule() {
             }
             
             // Simulación de guardado
+
+            /*
+            Las notas que se "guardan" en el Módulo HCE con la función actual se almacenan únicamente de forma simulada
+            en la consola del navegador, y no persisten en una base de datos real.
+
+            El valor se pierde al cerrar la pestaña o navegar a otra página.
+
+
+            */
             console.log(`Guardando nueva nota para paciente ${patient.id} (${patient.name}):\n${noteContent}`);
             alert(`Nota de ${patient.name} guardada exitosamente. (Simulación)`);
             

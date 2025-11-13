@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HYGIA - Iniciar Sesión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <style>
+      /*
+         * Estilos personalizados usando Tailwind
+         * Nota: Montserrat fue reemplazado por Poppins para mantener la consistencia
+         */
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        background-color: #f0f4f8; /* Un fondo gris claro */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .login-wrapper {
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: white;
+      }
+
+      .login-card {
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: #1e3a8a; /* Azul oscuro corporativo */
+        color: white;
+        width: 35%; /* Ocupa un tercio del contenedor */
+      }
+
+      .logo-container i {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        color: #dbeafe; /* Azul muy claro */
+      }
+
+      .logo-container h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0;
+      }
+
+      .logo-container p {
+        font-weight: 300;
+        opacity: 0.8;
+        margin-top: 5px;
+      }
+
+      .appsmith-container {
+        width: 65%; /* Ocupa dos tercios del contenedor */
+        min-height: 600px;
+      }
+
+      .appsmith-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+
+      /* Media query para dispositivos móviles */
+      @media (max-width: 1024px) {
+        .login-wrapper {
+          flex-direction: column;
+          max-width: 500px;
+        }
+        .login-card,
+        .appsmith-container {
+          width: 100%;
+          min-height: auto;
+        }
+        .login-card {
+          padding: 30px 20px;
+          border-radius: 12px 12px 0 0;
+        }
+        .appsmith-container {
+          min-height: 500px; /* Asegura que el iframe sea visible */
+          border-radius: 0 0 12px 12px;
+        }
+      }
+    </style>
+  </head>
+  <body class="login-body">
+    <div class="login-wrapper">
+      <!-- Tarjeta Informativa HYGIA (Tu HTML original simplificado) -->
+      <div class="login-card">
+        <div class="logo-container">
+          <i class="fas fa-hospital-alt"></i>
+          <h1>HYGIA</h1>
+          <p>Sistema de Gestión Hospitalario</p>
+        </div>
+
+        <div class="mt-8 text-center">
+          <h2 class="text-xl font-semibold mb-2">Acceso Centralizado</h2>
+          <p class="text-sm opacity-90">
+            Por favor, use el formulario incrustado para autenticarse en el
+            sistema y acceder a los módulos de gestión.
+          </p>
+        </div>
+      </div>
+
+      <!-- Contenedor del Iframe de Appsmith -->
+      <div class="appsmith-container">
+        <iframe
+          src="https://santa-aurora.appsmith.com/app/sistema-gestion-hospitalario/login-68f365395dc15a4fb1296b77?embed=true"
+          class="appsmith-iframe"
+          title="Formulario de Inicio de Sesión de Appsmith"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </body>
+</html>
